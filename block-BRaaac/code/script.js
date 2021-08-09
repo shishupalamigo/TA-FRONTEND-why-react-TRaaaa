@@ -16,8 +16,7 @@ movieInput.addEventListener('keyup', (event) => {
 
 function handleDelete(event) {
   let id = event.target.id;
-  console.log(event.target.dataset);
-  allMovies.splice(id);
+  allMovies.splice(id, 1);
   createUI(allMovies);
 }
 function handleChange(event) {
@@ -31,7 +30,11 @@ function createElement(type, attr = {}, ...children) {
   for (let key in attr) {
     if (key.startsWith('data-')) {
       element.setAttribute(key, attr.key);
-    } else element[key] = attr[key];
+    } else if(key.startsWith('on')) {
+        let eventType = key.replace('on', '').toLowerCase();
+        element.addEventListener(eventType, attr[key]);
+    }
+     else element[key] = attr[key];
   }
   children.forEach((child) => {
     if (typeof child === 'object') {
@@ -53,20 +56,20 @@ function createUI(allMovies) {
       {
         className: 'movie',
       },
-      createElement('input', {
-        type: 'checkbox',
+      createElement('button', {
         id: i,
-        className: 'check',
-        checked: movie.watched,
-        onclick: handleChange,
-      }),
-      createElement('p', {}, movie.name),
+        className: 'border px-1 py-1 bg-blue-600 text-white text-xs',
+        onClick: handleChange,
+      }, movie.watched ? "watched" : "To Watch"),
+      createElement('p', {
+          className: 'text-lg font-bold'
+      }, movie.name),
       createElement(
         'button',
         {
-          className: 'delete',
+          className: 'text-red-500',
           id: i,
-          onclick: handleDelete,
+          onClick: handleDelete,
         },
         'X'
       )

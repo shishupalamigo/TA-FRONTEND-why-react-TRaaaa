@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Watch List</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="m-20">
+    <main class="flex justify-center">
+        <section class="w-2/4 flex flex-col bg-green-500 p-5">
+            <h1 class="text-xl font-bold text-center mb-10">Movie watch list</h1>
+            <input type="text" class="movieInput border-2 p-2" placeholder="Enter Movie Name">
+            <ul class="list">
+
+            </ul>
+        </section>
+    </main>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        let movieInput = document.querySelector('.movieInput');
+        let list = document.querySelector('.list');
+
+        let allMovies = [
+            {
+                name: "Forest Gump",
+                watched: false
+            },
+            {
+                name: "Batman Begins",
+                watched: true
+            }
+        ];
+
+        movieInput.addEventListener('keyup', (event) => {
+            if (event.keyCode === 13) {
+                allMovies.push({
+                    name: event.target.value,
+                    watched: false,
+                });
+                createUI(allMovies);
+                event.target.value = '';
+            }
+        });
+
+        function handleDelete(event) {
+            let id = event.target.id;
+            allMovies.splice(id, 1);
+            createUI(allMovies);
+        }
+        function handleChange(event) {
+            let id = event.target.id;
+            allMovies[id].watched = !allMovies[id].watched;
+            createUI(allMovies);
+        }
+
+        let createElement = React.createElement;
+
+        function createUI(allMovies) {
+            let movieList = allMovies.map((movie, i) => {
+                return  <li className="movie">
+                    <button id={i} className="border px-1 py-1 bg-blue-600 text-white text-xs" onClick={handleChange}> {movie.watched ? "watched" : "To Watch"}</button>
+                    <p className="text-lg font-bold">{movie.name}</p>
+                    <button id={i} className="text-red-500" onClick={handleDelete}>X</button>
+                </li>;
+            });
+            ReactDOM.render(movieList, list);
+        }
+        createUI(allMovies);
+
+    </script>
+</body>
+
+</html>

@@ -65,11 +65,13 @@
 
         function createUI(allMovies) {
             let movieList = allMovies.map((movie, i) => {
-                return  <li className="movie">
-                    <button id={i} className="border px-1 py-1 bg-blue-600 text-white text-xs" onClick={handleChange}> {movie.watched ? "watched" : "To Watch"}</button>
-                    <p className="text-lg font-bold">{movie.name}</p>
-                    <button id={i} className="text-red-500" onClick={handleDelete}>X</button>
-                </li>;
+                return (
+                    <li className="movie" key={movie.name}>
+                        <button id={i} className="border px-1 py-1 bg-blue-600 text-white text-xs" onClick={handleChange}> {movie.watched ? "watched" : "To Watch"}</button>
+                        <p className="text-lg font-bold">{movie.name}</p>
+                        <button id={i} className="text-red-500" onClick={handleDelete}>X</button>
+                    </li>
+                );
             });
             ReactDOM.render(movieList, list);
         }

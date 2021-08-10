@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://kit.fontawesome.com/d77ac583c4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class='m-20'>
+    <div id="root" class="flex justify-center bg-green-100 p-10 container w-2/4 my-12 mx-auto p-6 bg-gray-300 rounded-lg"></div>
+    
+    <script type="text/babel">
+
+let cardInfo = {
+  title: 'City Lights in New York',
+  date: new Date('2017-01-26'),
+  comments: 67,
+  subTitle: 'The city that never sleeps.',
+  description:
+    'New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.',
+  category: 'photos',
+  imageURL:
+    'https://images.unsplash.com/photo-1610874933184-7728fd666162?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+};
+    let months = ['JAN', "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    let content = 
+ 
+        <div className="relative">
+            <img src={cardInfo.imageURL} alt="New York" className="h-72" />
+            <div className= "w-16 h-16 text-white font-bold absolute bg-red-500 rounded-full right-14 top-8 flex flex-col justify-center items-center">
+                <span>{cardInfo.date.getDay()}</span>
+                <span>{months[cardInfo.date.getMonth()]}</span>
+            </div>
+            <div className="absolute bg-red-500 text-white font-bold p-3 top-60">
+                <span>{cardInfo.category.toUpperCase()}</span>
+            </div>
+            <header className="mt-10 mb-10">
+             <h1 className="text-4xl font-bold text-center mb-5">{cardInfo.title}</h1>
+             <h3 className="text-xl font-bold text-center text-red-700">{cardInfo.subTitle}</h3>       
+            </header>
+            <div className="mb-10">
+                <p className="text-lg">{cardInfo.description}</p>    
+            </div>
+            <>
+                <span className="px-4 inline-block pb-4 text-custom"><i className="fas fa-history mr-2"></i>6 mins ago</span> 
+                <span className="text-custom ml-4"><i className="fas fa-comments mr-2"></i>{cardInfo.comments + " comments"}</span>
+            </>
+        </div>
+    ReactDOM.render(content, document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -10,3 +10,5 @@
 
 - ![Twitter Component Breakdown](./twitterComponentBreakdown.png)
 
+- ![Twitter Component Breakdown](./twitterComponents.png)
+
